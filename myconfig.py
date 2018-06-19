@@ -8,14 +8,19 @@
 # myconfig.py:
 
 ########################################
+<<<<<<< HEAD
+# Step 1:
+Task = 'MouseBot-Reaching'
+=======
 # Step 1: Selecting Frames from videos
+>>>>>>> 7e96c0fbb4d82c56f05c76e08c55d3947a48db9a
 ########################################
 
 Task = 'reaching'
 
 # Filename and path to behavioral video:
-vidpath = '.'
-filename = 'reachingvideo1.avi'
+vidpath = 'videos'
+filename = 'video_1.avi'
 
 cropping = True
 
@@ -24,25 +29,34 @@ cropping = True
 # x2,y2 is the lower right corner of the croped region.
 
 x1 = 0
-x2 = 640
-y1 = 277
-y2 = 624
+x2 = 224
+y1 = 0
+y2 = 224
 
 # Portion of the video to sample from in step 1. Set to 1 by default.
 portion = 1
 
+<<<<<<< HEAD
+#######################################
+# Step 2:
+=======
 ########################################
 # Step 2: Converting frames to pandas array 
+>>>>>>> 7e96c0fbb4d82c56f05c76e08c55d3947a48db9a
 ########################################
 
-bodyparts = ["hand", "Finger1", "Finger2","Joystick"]  # Exact sequence of labels as were put by
+bodyparts = ["pellet", "nose", "paw"]  # Exact sequence of labels as were put by
 # annotator in *.csv file
-Scorers = ['Mackenzie']  # who is labeling?
+Scorers = ['Sotiris']  # who is labeling?
 
 # Set this true if the data was sequentially labeled and if there is one file per folder (you can set the name of this file below, i.e. multibodypartsfilename)
 # Otherwise there should be individual files per bodypart, i.e. in our demo case hand.csv, Finger1.csv etc.
 # If true then those files will be generated from Results.txt
+<<<<<<< HEAD
+multibodypartsfile=True
+=======
 multibodypartsfile=False 
+>>>>>>> 7e96c0fbb4d82c56f05c76e08c55d3947a48db9a
 multibodypartsfilename="Results.csv"
 
 # When importing the images and the labels in the csv/xls files should be in the same order!
@@ -67,8 +81,8 @@ alphavalue =.6 #transparency of labels
 # Step 4: Generate Training Files 
 ########################################
 
-date = 'Jan30'
-scorer = 'Mackenzie'
+date = '18Jun'
+scorer = 'Sotiris'
 
 # Userparameters for training set. Other parameters can be set in pose_cfg.yaml
 Shuffles = [1]  # Ids for shuffles, i.e. range(5) for 5 shuffles
