@@ -8,15 +8,9 @@
 # myconfig.py:
 
 ########################################
-<<<<<<< HEAD
+
 # Step 1:
 Task = 'MouseBot-Reaching'
-=======
-# Step 1: Selecting Frames from videos
->>>>>>> 7e96c0fbb4d82c56f05c76e08c55d3947a48db9a
-########################################
-
-Task = 'reaching'
 
 # Filename and path to behavioral video:
 vidpath = 'videos'
@@ -36,13 +30,8 @@ y2 = 224
 # Portion of the video to sample from in step 1. Set to 1 by default.
 portion = 1
 
-<<<<<<< HEAD
-#######################################
-# Step 2:
-=======
 ########################################
-# Step 2: Converting frames to pandas array 
->>>>>>> 7e96c0fbb4d82c56f05c76e08c55d3947a48db9a
+# Step 2: Converting frames to pandas array
 ########################################
 
 bodyparts = ["pellet", "nose", "paw"]  # Exact sequence of labels as were put by
@@ -52,11 +41,8 @@ Scorers = ['Sotiris']  # who is labeling?
 # Set this true if the data was sequentially labeled and if there is one file per folder (you can set the name of this file below, i.e. multibodypartsfilename)
 # Otherwise there should be individual files per bodypart, i.e. in our demo case hand.csv, Finger1.csv etc.
 # If true then those files will be generated from Results.txt
-<<<<<<< HEAD
+
 multibodypartsfile=True
-=======
-multibodypartsfile=False 
->>>>>>> 7e96c0fbb4d82c56f05c76e08c55d3947a48db9a
 multibodypartsfilename="Results.csv"
 
 # When importing the images and the labels in the csv/xls files should be in the same order!
