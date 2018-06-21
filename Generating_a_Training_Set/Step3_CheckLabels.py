@@ -53,7 +53,7 @@ print(all_joints)
 print(all_joints_names)
 
 
-basefolder = './' + 'data-' + Task
+basefolder = 'data-' + Task
 numbodyparts = len(bodyparts)
 
 # Data frame to hold data of all data sets for different scorers, bodyparts and images
@@ -109,7 +109,7 @@ for folder in folders:
 
         plt.imshow(image, 'bone')
         for cc, scorer in enumerate(Scorers):
-            if index==0:
+            if index == 0:
                 print("Creating images with labels by ", scorer)		
             for c, bp in enumerate(comparisonbodyparts):
                 plt.plot(
@@ -117,8 +117,9 @@ for folder in folders:
                     DataCombined[scorer][bp]['y'].values[imindex],
                     Labels[cc],
                     color=Colorscheme(c),
-                    alpha=alphavalue,
-                    ms=msize)
+                    alpha=1,
+                    ms=50)
+                print(str(DataCombined[scorer][bp]['x'].values[imindex]))
 
         plt.xlim(0, w)
         plt.ylim(0, h)

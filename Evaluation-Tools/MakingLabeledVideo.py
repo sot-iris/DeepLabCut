@@ -18,6 +18,7 @@ Note: run python3 AnalyzeVideos.py first.
 ####################################################
 import os.path
 import sys
+import cv2
 subfolder = os.getcwd().split('Evaluation-Tools')[0]
 sys.path.append(subfolder)
 # add parent directory: (where nnet & config are!)
@@ -31,7 +32,6 @@ import imageio
 imageio.plugins.ffmpeg.download()
 from skimage.util import img_as_ubyte
 from moviepy.editor import VideoFileClip
-import subprocess
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
@@ -71,7 +71,7 @@ scorer = 'DeepCut' + "_resnet" + str(resnet) + "_" + Task + str(
 ##################################################
 # videofolder='../videos/' #where your folder with videos is.
 
-os.chdir(videofolder)
+os.chdir('SampleVideos')
 
 videos = np.sort([fn for fn in os.listdir(os.curdir) if (videotype in fn) and ("labeled" not in fn)])
 
@@ -86,9 +86,12 @@ for video in videos:
     else:
         print("Loading ", video, "and data.")
         dataname = video.split('.')[0] + scorer + '.h5'
+        print(str(dataname))
         try:
             Dataframe = pd.read_hdf(dataname)
+            print("cool")
             clip = VideoFileClip(video)
+            print("also cool")
         except FileNotFoundError:
             print("Data was not analyzed (run AnalysisVideos.py first).")
 
@@ -128,9 +131,9 @@ for video in videos:
                         plt.scatter(
                             Dataframe[scorer][bp]['x'].values[index],
                             Dataframe[scorer][bp]['y'].values[index],
-                            s=dotsize**2,
+                            s=dotsize**3,
                             color=colors(bpindex),
-                            alpha=alphavalue)
+                            alpha=1)
 
                 plt.xlim(0, w)
                 plt.ylim(0, h)
@@ -142,15 +145,26 @@ for video in videos:
 
                 plt.close("all")
 
-        os.chdir(tmpfolder)
+        #os.chdir(tmpfolder)
 
         print("Generating video")
-        subprocess.call([
-            'ffmpeg', '-framerate',
-            str(clip.fps), '-i', 'file%04d.png', '-r', '30', '../'+vname + '_DeepLabCutlabeled.mp4'
-        ])
+
+        image_folder = tmpfolder
+        video_name = video.split('.')[0] + '_deeplabcutlabelled.avi'
+
+        images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
+        frame = cv2.imread(os.path.join(image_folder, images[0]))
+        height, width, layers = frame.shape
+
+        out = cv2.VideoWriter(os.path.join('saved', video_name), cv2.VideoWriter_fourcc(*'XVID'), int(clip.fps), (height,width))
+        for i in range(len(images)):
+            out.write(cv2.imread(os.path.join(image_folder, images[i])))
+        out.release()
+
         if deleteindividualframes:
             for file_name in glob.glob("*.png"):
                 os.remove(file_name)
 
         os.chdir("../")
+        print("done")
+        break

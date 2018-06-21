@@ -10,13 +10,13 @@
 ########################################
 
 # Step 1:
-Task = 'MouseBot-Reaching'
+Task = 'HorizontalLadder'
 
 # Filename and path to behavioral video:
-vidpath = 'videos'
-filename = 'video_1.avi'
+vidpath = '.'
+filename = 'horizontal.MTS'
 
-cropping = True
+cropping = False
 
 # ROI dimensions / bounding box (only used if cropping == True)
 # x1,y1 indicates the top left corner and
@@ -34,7 +34,7 @@ portion = 1
 # Step 2: Converting frames to pandas array
 ########################################
 
-bodyparts = ["pellet", "nose", "paw"]  # Exact sequence of labels as were put by
+bodyparts = ["tail", "hind_left", "hind_right", "fore_left", "fore_right", "head"]  # Exact sequence of labels as were put by
 # annotator in *.csv file
 Scorers = ['Sotiris']  # who is labeling?
 
@@ -50,7 +50,7 @@ multibodypartsfilename="Results.csv"
 #(i.e. top left corner (close to 0,0)), these "false" labels will then be removed. To do so set the following variable:
 #set this to 0 if no labels should be removed!
 
-invisibleboundary=10 # If labels are closer to origin than this number they are set to NaN (not a number). Please adjust to your situation. Units in pixel.
+invisibleboundary=100 # If labels are closer to origin than this number they are set to NaN (not a number). Please adjust to your situation. Units in pixel.
  
 imagetype=".png" # image type of labeled frames
 
@@ -67,7 +67,7 @@ alphavalue =.6 #transparency of labels
 # Step 4: Generate Training Files 
 ########################################
 
-date = '18Jun'
+date = '21Jun'
 scorer = 'Sotiris'
 
 # Userparameters for training set. Other parameters can be set in pose_cfg.yaml

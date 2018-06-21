@@ -39,6 +39,7 @@ from config import load_config
 
 basefolder = os.path.join('..','pose-tensorflow','models')
 folder = os.path.join('UnaugmentedDataSet_' + Task + date)
+print("hey")
 
 for shuffleIndex, shuffle in enumerate(Shuffles):
     for trainFractionIndex, trainFraction in enumerate(TrainingFraction):
@@ -81,4 +82,4 @@ for shuffleIndex, shuffle in enumerate(Shuffles):
                 print("This net has already been evaluated!")
             except:
                  # if not analyzed, then call auxiliary script to analyze the network:
-                 subprocess.call(['python3','EvaluateNetwork.py',str(snapIndex),str(shuffleIndex),str(trainFractionIndex)])
+                 subprocess.call(['python','EvaluateNetwork.py',str(snapIndex),str(shuffleIndex),str(trainFractionIndex)])

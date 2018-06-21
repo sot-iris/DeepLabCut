@@ -10,7 +10,7 @@
 #########################################################################################
 
 # Filename and path to behavioral video (for labeling)
-videofolder = '../videos/'
+videofolder = 'videos'
 cropping = False
 videotype='.avi' #type of videos to analyze 
 
@@ -24,28 +24,28 @@ videotype='.avi' #type of videos to analyze
 # x2,y2 is the lower right corner of the croped region.
 
 x1 = 0
-x2 = 640
-y1 = 277
-y2 = 624
+x2 = 224
+y1 = 0
+y2 = 224
 
 #########################################################################################
 # Analysis Network parameters (so that the right networks is loaded for analysis)
 #########################################################################################
-scorer = 'Mackenzie'
-Task = 'reaching'
-date = 'Jan30'
+scorer = 'Sotiris'
+Task = 'MouseBot-Reaching'
+date = '18Jun'
 trainingsFraction = 0.95  # Fraction of labeled images used for training
 resnet = 50
 snapshotindex = -1
 shuffle = 1
 
-storedata_as_csv=False #if true then the time series of poses will (also) be saved as csv. 
+storedata_as_csv=True #if true then the time series of poses will (also) be saved as csv.
 # Note the data is always saved in hdf - format which is an efficient format that easily allows to load the full pandas multiarray at a later stage
 
 #########################################################################################
 ## For plotting (MakingLabeledVideo.py)
 #########################################################################################
-trainingsiterations = 3500  # type the number listed in the h5 file containing the pose estimation data. The video will be generated
+trainingsiterations = 50000  # type the number listed in the h5 file containing the pose estimation data. The video will be generated
 #based on the labels for this network state.
 pcutoff = 0.1  # likelihood cutoff for body part in image
 

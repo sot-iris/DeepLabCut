@@ -28,7 +28,7 @@ import sys
 sys.path.append(os.getcwd().split('Generating_a_Training_Set')[0])
 from myconfig import Task, bodyparts, Scorers, invisibleboundary, multibodypartsfile, multibodypartsfilename
 
-basefolder = 'data-' + Task + '/'
+basefolder = 'data-' + Task
 
 
 ###################################################
@@ -45,7 +45,7 @@ if multibodypartsfile==True:
         frame_grouped = dframe.groupby('Slice') #Note: the order of bodyparts list in myconfig and labels must be identical!
         for i, bodypart in enumerate(bodyparts):
             part_df = frame_grouped.nth(i)
-            part_fn =  part_fn = os.path.join(basefolder,folder,bodypart+'.csv')
+            part_fn = part_fn = os.path.join(basefolder,folder,bodypart+'.csv')
             part_df.to_csv(part_fn)
 
 ###################################################
@@ -91,7 +91,7 @@ for scorer in Scorers:
             ]
             files.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
-            imageaddress = [folder + '/' + f for f in files]
+            imageaddress = [folder + f for f in files]
             Data_onefolder = pd.DataFrame({'Image name': imageaddress})
 
             frame, Frame = None, None

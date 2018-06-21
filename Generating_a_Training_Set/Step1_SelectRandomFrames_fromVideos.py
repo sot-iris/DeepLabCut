@@ -27,6 +27,7 @@ import numpy as np
 import os
 import math
 import sys
+import cv2
 sys.path.append(os.getcwd().split('Generating_a_Training_Set')[0])
 from myconfig import Task, vidpath, filename, x1, x2, y1, y2, portion, \
     Scorers, bodyparts, date, cropping
@@ -39,7 +40,7 @@ print(bodyparts)
 print(Scorers)
 print(date)
 
-basefolder = 'data-' + Task + '/'
+basefolder = 'data-' + Task
 auxiliaryfunctions.attempttomakefolder(basefolder)
 
 #####################################################################
@@ -49,7 +50,7 @@ auxiliaryfunctions.attempttomakefolder(basefolder)
 # Number of frames to pick (set this to 0 until you found right cropping)
 numframes2pick = 100
 
-clip = VideoFileClip(vidpath + '/' + filename)
+clip = VideoFileClip(os.path.join(vidpath, filename))
 print("Duration of video [s], ", clip.duration, "fps, ", clip.fps,
       "Cropped frame dimensions: ", clip.size)
 
@@ -73,6 +74,7 @@ All coordinates are in pixels. Float numbers are accepted.
 
 image = clip.get_frame(1.2)
 io.imsave("IsCroppingOK.png", image)
+
 print("--> Open CroppingOK.png file to set the output range! <---")
 print("--> Adjust shiftx, shifty, fx and fy accordingly! <---")
 
@@ -82,7 +84,7 @@ print("--> Adjust shiftx, shifty, fx and fy accordingly! <---")
 
 print("Videoname: ", filename)
 folder = filename.split('.')[0]
-auxiliaryfunctions.attempttomakefolder(basefolder + folder)
+auxiliaryfunctions.attempttomakefolder(os.path.join(basefolder, folder))
 
 frames = np.random.randint(
     math.floor(clip.duration * clip.fps * portion), size=numframes2pick - 1)
@@ -91,15 +93,13 @@ width = int(np.ceil(np.log10(clip.duration * clip.fps)))
 for index in frames:
     try:
         image = img_as_ubyte(clip.get_frame(index * 1. / clip.fps))
-        io.imsave(
-            basefolder + folder + "/img" + str(index).zfill(width) + ".png",
-            image)
+        io.imsave(os.path.join(
+            basefolder, folder, "img" + str(index).zfill(width) + ".png"), image)
     except:
         print("Frame # ", index, " does not exist.")
 
 # Extract the first frame (not cropped!) - useful for data augmentation
-clip = VideoFileClip(vidpath + '/' + filename)
+clip = VideoFileClip(os.path.join(vidpath, filename))
 index = 0
 image = img_as_ubyte(clip.get_frame(index * 1. / clip.fps))
-io.imsave(basefolder + folder + "/img" + str(index).zfill(width) + ".png",
-          image)
+io.imsave(os.path.join(basefolder, folder, "img" + str(index).zfill(width) + ".png"), image)

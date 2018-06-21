@@ -113,8 +113,10 @@ pdindex = pd.MultiIndex.from_product(
 ##################################################
 
 # videofolder='../videos/' #where your folder with videos is.
+cwd = os.getcwd()
 
-os.chdir(videofolder)
+print(cwd)
+os.chdir('SampleVideos')
 videos = np.sort([fn for fn in os.listdir(os.curdir) if (videotype in fn)])
 print("Starting ", videofolder, videos)
 for video in videos:
